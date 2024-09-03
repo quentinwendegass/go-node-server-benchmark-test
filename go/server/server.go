@@ -4,14 +4,11 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-	"runtime"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	runtime.GOMAXPROCS(1)
-
 	router := gin.Default()
 
 	router.POST("/filter", filter)
@@ -41,12 +38,11 @@ func filter(context *gin.Context) {
 	}
 }
 
-
 func filterEntryByVersion(entry Entry) bool {
 	return entry.Version > 5
 }
 
-type Filter [T any]func (item T) bool
+type Filter[T any] func(item T) bool
 
 func filterJsonArray[T any](reader io.Reader, writer io.Writer, filter Filter[T]) error {
 	decoder := json.NewDecoder(reader)
