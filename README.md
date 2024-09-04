@@ -8,8 +8,6 @@ The API takes in an array in JSON format, filters the items, and returns the fil
 
 For the fun of it, I included a `/status` endpoint to monitor the server's health. This was due to past issues we had with health check failures under heavy load (e.g., Kubernetes restarting our production service unexpectedly).
 
-To be fair with Node.js, since Node.Js cannot run code in parallel I used the "cluster" module to run the API on all cores.
-
 To ensure fairness in comparing Node.js, which cannot natively run code in parallel, I used the "cluster" module to run the API on all available cores.
 
 The load test was conducted with 100 parallel requests and 50 iterations on a MacBook Pro 2019 with an Intel i7 6-Core 2.6GHz CPU. A heartbeat request was sent every 5 seconds.
